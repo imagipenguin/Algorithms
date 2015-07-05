@@ -124,11 +124,12 @@ public class Main {
     }
 
     public static int[] data() {
+        //Reading the text file info.  Do not edit!
 
         System.out.println("Reading File from Java code");
         //Name of the file
-        String fileName = "/Users/Kristin/Desktop/IntegerArray.txt";
-        ArrayList<String> integers = new ArrayList<String>();
+        String fileName = "/Users/Jones Kristin/Desktop/IntegerArray.txt";
+        //^^^^^May need to change this file depending on download location.^^^^^
         ArrayList<Integer> ints = new ArrayList<Integer>();
         try {
 
