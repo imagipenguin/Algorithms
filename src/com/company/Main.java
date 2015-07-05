@@ -10,7 +10,10 @@ public class Main {
     public static long countinv = 0;
 
     public static void log(Object args) {
+        //This function was created to make it easier to output to the command line.
         System.out.println(args.toString());
+        //Usage: log(string); or log(integer); or log("comment "+integer);
+        //This does NOT work with arrays or lists.
     }
 
     public static void test_mergesort(int[] args){
@@ -21,50 +24,31 @@ public class Main {
 
 
     public static int[] merge(int[] a, int[] b) {
+        //Write the code for a sorting a merge here
         //log("Begin Merge");
-        int n = a.length + b.length;
+
         //log("The length of the array is " + n);
-        int[] merge = new int[n];
-        int i = 0;
-        int j = 0;
-        for (int k = 0; k < n; k++) {
-            if (i < a.length && j < b.length) {
-                if (a[i] <= b[j]) {
-                    merge[k] = a[i];
-                    i++;
-                } else {
-                    merge[k] = b[j];
-                    j++;
-                    Main.countinv += a.length - i;
-                }
-            } else {
-                if (j < b.length) {
-                    merge[k] = b[j];
-                    j++;
-                } else {
-                    merge[k] = a[i];
-                    i++;
-                }
-            }
-            //log("The value of i is " + i + " and the value of j is " + j);
-            //log(merge[k]);
-        }
+
+        //Keep track of index i and j of the merging arrays
+        //Loop from k to length of the merged array
+        //If a(i) < b(j) place a(i) in the array
+        //Move on to the next index of a
+
+        //Else place b(j) in the array
+        //Move on to the next index of b
+
+        //Don't forget edge/end cases!
+        int[] merge = new int[]{};
         return merge;
     }
 
     public static int[] mergesort(int[] args) {
-        int l = args.length;
-        //log("the length is "+l);
-        //log("the halfway is "+(l-1)/2);
-        if (l > 1) {
-            int[] a = Arrays.copyOfRange(args, 0, (l - 1) / 2 + 1);
-            int[] b = Arrays.copyOfRange(args, (l - 1) / 2 + 1, l);
-            args = merge(mergesort(a), mergesort(b));
-        }
+        //Create the recursion for a merge sort here
+        //Split the array into 2 pieces
+        //Call mergesort on both arrays
+        //Merge the sorted arrays together
 
-
-        //System.out.println(Arrays.toString(a));
-        //System.out.println(Arrays.toString(b));
+        //Don't forget edge/end cases!
         return args;
     }
 
@@ -72,27 +56,30 @@ public class Main {
         // write your code here
         System.out.println("Begin Code");
 
-        //String[] arr = integers.toArray(new String[integers.size()]);
-
+        //test case 1 - merge ordered arrays together
         int[] a = new int[]{1, 3, 5, 7};
-        int[] b = new int[]{2, 4, 6, 8, 10, 12};
-        int[] aa = new int[]{1};
-        int[] bb = new int[]{2};
-        int[] aaa = new int[]{7, 3, 1, 5};
-        int[] testcase = new int[]{1, 3, 5, 2, 4, 6};
-        //int[] test = merge(bb, aa);
+        int[] b = new int[]{2, 4, 6, 8};
+        int [] c = merge(a,b);
+        log("Test Case 1 - merging ordered arrays");
+        System.out.println(Arrays.toString(c));
+
+        //test case 2 - merge unordered arrays
+        int[] a2 = new int[]{1, 5, 3, 7};
+        int[] b2 = new int[]{8, 4, 6, 2};
+        int [] c2 = merge(a2, b2);
+        log("Test Case 2 - merging unordered arrays");
+        System.out.println(Arrays.toString(c2));
+
+        //test case 3 - count the number of inversions for a simple array
+        int [] a3 = new int[]{1,3,5,2,4,6};
+        log("Test case 3 - counting inversions for a simple array");
+        log("The answer should be 3");
+        test_mergesort(a3);
+
+
         /*
-        int[] testcaseforum = new int[] { 9, 12, 3, 1, 6, 8, 2, 5, 14, 13, 11, 7, 10, 4, 0 };
-        int[] testms = mergesort(testcaseforum);
-        log(Main.countinv);
-        Main.countinv = 0;
-
-        int[] testms2 = mergesort(b);
-        log(Main.countinv);
-        Main.countinv = 0;
-        int[] testms3 = mergesort(testcase);
-        */
-
+        //This is for the actual data...collecting the data takes a lot of time.
+        //Only uncomment when you are absolutely ready to test on the real data.
         int[] arr = data();
         int[] testcaseprogressive1 = Arrays.copyOfRange(arr, 0, 10000);
         int[] testcaseprogressive2 = Arrays.copyOfRange(arr, 0, 20000);
@@ -114,13 +101,9 @@ public class Main {
         test_mergesort(testcaseprogressive8);
         test_mergesort(testcaseprogressive9);
         test_mergesort(testcaseprogressive10);
+        */
 
-        //\log(Arrays.toString(arr));
-        //log(arr[3]);
-        //log(arr[3]+1);
-        //int[] sortdata = mergesort(testcaseprogressive);
-        //System.out.println(Arrays.toString(sortdata));
-        //log("The number of inversions is " + Main.countinv + ".");
+
     }
 
     public static int[] data() {
