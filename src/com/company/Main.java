@@ -16,16 +16,44 @@ public class Main {
         //This does NOT work with arrays or lists.
     }
 
-    public static void test_mergesort(int[] args){
-        Main.countinv=0;
-        int[] i = mergesort(args);
-        log("The number of inversions is "+countinv);
+    public static void test_mergesort(int[] args) {
+        Main.countinv = 0;
+        int[] i = mergesortrecursion(args);
+        log("The number of inversions is " + countinv);
     }
 
 
-    public static int[] merge(int[] a, int[] b) {
+    public static int[] mergesort(int[] a, int[] b) {
         //Write the code for a sorting a merge here
         //log("Begin Merge");
+        int i = 0;
+        int j = 0;
+        int n = a.length + b.length;
+        int[] mergesortout = new int[n];
+        //log("Run the for loop");
+        for (int k = 0; k < n; k++) {
+            System.out.println(Arrays.toString(mergesortout));
+            //log("Do the if statement for index " + k + " with i=" + i + " and j=" + j);
+            if ((i < a.length) && (j < b.length)) {
+                log("length check");
+                if ((a[i] <= b[j])) {
+                    log("the index of i is " + i);
+                    mergesortout[k] = a[i];
+                    i++;
+                } else if (a[i] > b[j]) {
+                    //log("the index of j is " + j);
+                    mergesortout[k] = b[j];
+                    j++;
+                }
+            } else if (i == a.length) {
+                mergesortout[k] = b[j];
+                j++;
+            } else if (j == b.length) {
+                mergesortout[k] = a[i];
+                i++;
+            }
+        }
+
 
         //log("The length of the array is " + n);
 
@@ -37,12 +65,13 @@ public class Main {
         //Else place b(j) in the array
         //Move on to the next index of b
 
+
         //Don't forget edge/end cases!
-        int[] merge = new int[]{};
-        return merge;
+        log("End of Merge Sort!");
+        return mergesortout;
     }
 
-    public static int[] mergesort(int[] args) {
+    public static int[] mergesortrecursion(int[] args) {
         //Create the recursion for a merge sort here
         //Split the array into 2 pieces
         //Call mergesort on both arrays
@@ -59,22 +88,26 @@ public class Main {
         //test case 1 - merge ordered arrays together
         int[] a = new int[]{1, 3, 5, 7};
         int[] b = new int[]{2, 4, 6, 8};
-        int [] c = merge(a,b);
+        log("Running mergesort on test case 1");
+        int[] c = mergesort(a, b);
         log("Test Case 1 - merging ordered arrays");
         System.out.println(Arrays.toString(c));
+
 
         //test case 2 - merge unordered arrays
         int[] a2 = new int[]{1, 5, 3, 7};
         int[] b2 = new int[]{8, 4, 6, 2};
-        int [] c2 = merge(a2, b2);
+        int[] c2 = mergesortrecursion(a2, b2);
         log("Test Case 2 - merging unordered arrays");
         System.out.println(Arrays.toString(c2));
 
+        /*
         //test case 3 - count the number of inversions for a simple array
-        int [] a3 = new int[]{1,3,5,2,4,6};
+        int[] a3 = new int[]{1, 3, 5, 2, 4, 6};
         log("Test case 3 - counting inversions for a simple array");
         log("The answer should be 3");
         test_mergesort(a3);
+        */
 
 
         /*
